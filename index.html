@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<title>Grok Bot Office</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+</head>
+<body class="day">
+<header id="top">
+  <button class="iconbtn mob" id="btnLeft" aria-label="Floors">☰</button>
+  <div class="logo"><span class="mark">◆</span> <span class="full">Grok Bot </span>Office</div>
+  <div class="live" id="live"><i></i><span id="liveText">Connecting…</span></div>
+  <button class="pillbtn" id="btnDay" title="Day / Night">☀︎ Day</button>
+  <button class="pillbtn" id="btnTour" title="Tour the floors">▶ Tour</button>
+  <div id="notice" hidden>
+    <span class="nicon">!</span><span id="noticeText"></span>
+    <button id="noticeView">View</button><a id="noticeChat" target="_blank" rel="noopener">Open chat</a>
+    <button id="noticeClose" aria-label="Dismiss">×</button>
+  </div>
+  <div class="counts">
+    <span><i class="dot g"></i><b id="cWork">0</b> working</span>
+    <span><i class="dot y"></i><b id="cWait">0</b> waiting</span>
+    <span><i class="dot r"></i><b id="cErr">0</b> errors</span>
+    <span><i class="dot k"></i><b id="cRest">0</b> resting</span>
+  </div>
+  <button class="iconbtn mob" id="btnRight" aria-label="Floor details">▤</button>
+</header>
+<main>
+  <aside id="left" class="panel">
+    <h3>Floors</h3>
+    <ul id="floors" class="floors"></ul>
+    <h3>Waiting on me <span class="badge" id="waitCount">0</span></h3>
+    <ul id="waiting" class="list"></ul>
+    <details id="finBox"><summary>Finished <span class="badge" id="finCount">0</span></summary><ul id="finished" class="list small"></ul></details>
+    <details id="routBox"><summary>Routines <span class="badge" id="routCount">0</span></summary><ul id="routines" class="list small"></ul></details>
+  </aside>
+  <section id="stage">
+    <canvas id="c"></canvas>
+    <div id="overlay"></div>
+    <div id="activity"><div class="ahead"><span>Activity</span><button id="actToggle" aria-label="Collapse">–</button></div><ul id="actlist"></ul></div>
+    <div id="empty" hidden>No bots on this feed yet. Waiting for the first roster or status line…</div>
+  </section>
+  <aside id="right" class="panel">
+    <div class="rhead"><div class="fl-name" id="floorName">—</div><div class="fl-sub" id="floorSub"></div></div>
+    <ul id="floorBots" class="botlist"></ul>
+    <div id="usage" class="usage"></div>
+  </aside>
+</main>
+<div id="scrim"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
