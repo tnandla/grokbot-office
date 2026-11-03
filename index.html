@@ -15,6 +15,7 @@
   <div class="live" id="live"><i></i><span id="liveText">Connecting…</span></div>
   <button class="pillbtn" id="btnDay" title="Day / Night">☀︎ Day</button>
   <button class="pillbtn" id="btnTour" title="Tour the floors">▶ Tour</button>
+  <button class="pillbtn" id="btnReplay" title="Replay the last 24 h of real bot activity as a timelapse">⏱<span class="full"> Replay 24h</span></button>
   <div id="notice" hidden>
     <span class="nicon">!</span><span id="noticeText"></span>
     <button id="noticeView">View</button><a id="noticeChat" target="_blank" rel="noopener">Open chat</a>
@@ -41,6 +42,16 @@
     <canvas id="c"></canvas>
     <div id="overlay"></div>
     <div id="activity"><div class="ahead"><span>Activity</span><button id="actToggle" aria-label="Collapse">–</button></div><ul id="actlist"></ul></div>
+    <div id="rclock" hidden></div>
+    <div id="rbar" hidden>
+      <div class="rtop"><span id="rinfo"></span><button id="rexit" title="Back to live (Esc)">✕ Exit replay</button></div>
+      <div id="rctl">
+        <button id="rplay" aria-label="Pause">❚❚</button>
+        <div class="rtrack"><div id="rmarks"></div><input id="rpos" type="range" min="0" max="1000" value="0" aria-label="Replay position"></div>
+        <span id="rspeed"><button data-s="1" class="on">1×</button><button data-s="2">2×</button><button data-s="4">4×</button></span>
+      </div>
+      <div id="rnote"></div>
+    </div>
     <div id="empty" hidden>No bots on this feed yet. Waiting for the first roster or status line…</div>
   </section>
   <aside id="right" class="panel">

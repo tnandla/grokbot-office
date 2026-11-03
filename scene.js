@@ -185,8 +185,14 @@ export function createScene(canvas, { onPick }) {
     if (instant) target.copy(want);
   }
   let current = null;
-  function setNight(v) {
-    night = v; hemi.intensity = v ? 0.55 : 1.6; hemi.groundColor.set(v ? 0x1e293b : 0xd6dbe4); sun.intensity = v ? 0.5 : 2.0; sun.color.set(v ? 0x93c5fd : 0xffffff);
+  function setNight(v) { setDaylight(v ? 0 : 1); }
+  // f: 0 = full night, 1 = full day (in between for dawn / dusk during a replay)
+  const cDayG = new THREE.Color(0xd6dbe4), cNightG = new THREE.Color(0x1e293b), cDayS = new THREE.Color(0xffffff), cNightS = new THREE.Color(0x93c5fd), cDusk = new THREE.Color(0xfdba74);
+  function setDaylight(f) {
+    f = Math.max(0, Math.min(1, f)); night = f < 0.5;
+    hemi.intensity = 0.55 + (1.6 - 0.55) * f; hemi.groundColor.copy(cNightG).lerp(cDayG, f);
+    sun.intensity = 0.5 + (2.0 - 0.5) * f;
+    sun.color.copy(cNightS).lerp(cDayS, f); if (f > 0.05 && f < 0.95) sun.color.lerp(cDusk, 0.5 * (1 - Math.abs(f - 0.5) * 2));
   }
 
   // input: drag to turn, wheel/pinch to zoom, tap a bot to pick it
@@ -252,5 +258,5 @@ export function createScene(canvas, { onPick }) {
     requestAnimationFrame(frame);
   }
   resize(); requestAnimationFrame(frame);
-  return { build, setStatus, aim, setNight, project, get current() { return current; }, resize, ready: () => true };
+  return { build, setStatus, aim, setNight, setDaylight, project, get current() { return current; }, resize, ready: () => true };
 }
